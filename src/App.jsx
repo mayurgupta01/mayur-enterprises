@@ -60,7 +60,9 @@ function App() {
   };
 
   const addToWishlist = (product) => {
-    const alreadyAdded = wishlist.find((item) => item.id === product.id);
+    const alreadyAdded = wishlist.find(
+      (item) => item.id === product.id
+    );
 
     if (!alreadyAdded) {
       setWishlist([...wishlist, product]);
@@ -68,7 +70,9 @@ function App() {
   };
 
   const removeWishlistItem = (id) => {
-    setWishlist(wishlist.filter((item) => item.id !== id));
+    setWishlist(
+      wishlist.filter((item) => item.id !== id)
+    );
   };
 
   const total = cart.reduce(
@@ -137,7 +141,17 @@ function App() {
         />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/checkout" element={<Checkout />} />
+
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              cart={cart}
+              total={total}
+            />
+          }
+        />
+
         <Route path="/admin" element={<Admin />} />
       </Routes>
 
