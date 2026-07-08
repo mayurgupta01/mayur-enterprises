@@ -1,0 +1,71 @@
+const products = [
+  {
+    id: 1,
+    name: "Aashirvaad Atta",
+    brand: "Aashirvaad",
+    category: "Grocery",
+    weight: "10 kg",
+    price: 350,
+    oldPrice: 400,
+    image: "/images/atta.jpg",
+    rating: 4.8,
+    reviews: 1245,
+    discount: "12% OFF",
+    stock: "In Stock",
+    description:
+      "Premium quality whole wheat flour made from selected grains. Soft rotis and healthy everyday meals.",
+  },
+
+  {
+    id: 2,
+    name: "Fortune Sunflower Oil",
+    brand: "Fortune",
+    category: "Cooking Oil",
+    weight: "1 Litre",
+    price: 180,
+    oldPrice: 220,
+    image: "/images/oil.jpg",
+    rating: 4.7,
+    reviews: 987,
+    discount: "18% OFF",
+    stock: "In Stock",
+    description:
+      "Refined sunflower oil suitable for daily cooking with light taste and healthy nutrition.",
+  },
+
+  {
+    id: 3,
+    name: "Tata Salt",
+    brand: "Tata",
+    category: "Grocery",
+    weight: "1 kg",
+    price: 30,
+    oldPrice: 40,
+    image: "/images/salt.jpg",
+    rating: 4.9,
+    reviews: 2430,
+    discount: "25% OFF",
+    stock: "In Stock",
+    description:
+      "India's trusted iodized salt for better health and great taste in every meal.",
+  },
+
+  {
+    id: 4,
+    name: "Parle-G Biscuits",
+    brand: "Parle",
+    category: "Snacks",
+    weight: "250 g",
+    price: 10,
+    oldPrice: 15,
+    image: "/images/parleg.jpg",
+    rating: 4.6,
+    reviews: 3510,
+    discount: "33% OFF",
+    stock: "Limited Stock",
+    description:
+      "India's favourite glucose biscuits. Crispy, tasty and perfect with tea.",
+  },
+];
+
+export default products;
