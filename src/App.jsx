@@ -19,51 +19,78 @@ function App() {
   const [wishlist, setWishlist] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Add to Cart
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    const existing = cart.find((item) => item.id === product.id);
+
+    if (existing) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
   };
 
-  // Add to Wishlist
-  const addToWishlist = (product) => {
-    const alreadyAdded = wishlist.find(
-      (item) => item.id === product.id
+  const increaseQuantity = (id) => {
+    setCart(
+      cart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
     );
+  };
+
+  const decreaseQuantity = (id) => {
+    setCart(
+      cart.map((item) =>
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+    );
+  };
+
+  const removeItem = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
+
+  const addToWishlist = (product) => {
+    const alreadyAdded = wishlist.find((item) => item.id === product.id);
 
     if (!alreadyAdded) {
       setWishlist([...wishlist, product]);
     }
   };
 
-  // Remove from Cart
-  const removeItem = (index) => {
-    setCart(cart.filter((_, i) => i !== index));
-  };
-
-  // Remove from Wishlist
   const removeWishlistItem = (id) => {
-    setWishlist(
-      wishlist.filter((item) => item.id !== id)
-    );
+    setWishlist(wishlist.filter((item) => item.id !== id));
   };
 
-  // Total Price
   const total = cart.reduce(
-    (sum, item) => sum + item.price,
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const cartCount = cart.reduce(
+    (sum, item) => sum + item.quantity,
     0
   );
 
   return (
     <>
       <Navbar
-        cartCount={cart.length}
+        cartCount={cartCount}
         wishlistCount={wishlist.length}
         search={search}
         setSearch={setSearch}
       />
 
       <Routes>
-        {/* Home */}
         <Route
           path="/"
           element={
@@ -75,7 +102,6 @@ function App() {
           }
         />
 
-        {/* Product Details */}
         <Route
           path="/product/:id"
           element={
@@ -86,19 +112,19 @@ function App() {
           }
         />
 
-        {/* Cart */}
         <Route
           path="/cart"
           element={
             <Cart
               cart={cart}
               removeItem={removeItem}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
               total={total}
             />
           }
         />
 
-        {/* Wishlist */}
         <Route
           path="/wishlist"
           element={
@@ -110,13 +136,8 @@ function App() {
           }
         />
 
-        {/* Login */}
         <Route path="/login" element={<Login />} />
-
-        {/* Checkout */}
         <Route path="/checkout" element={<Checkout />} />
-
-        {/* Admin */}
         <Route path="/admin" element={<Admin />} />
       </Routes>
 

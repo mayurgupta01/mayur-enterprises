@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
-function Cart({ cart, removeItem, total }) {
+function Cart({
+  cart,
+  removeItem,
+  increaseQuantity,
+  decreaseQuantity,
+  total,
+}) {
   return (
     <div
       style={{
@@ -31,20 +37,16 @@ function Cart({ cart, removeItem, total }) {
           <p>Add some products to continue shopping.</p>
 
           <Link to="/">
-            <button
-              style={{
-                marginTop: "20px",
-              }}
-            >
+            <button style={{ marginTop: "20px" }}>
               🛍 Continue Shopping
             </button>
           </Link>
         </div>
       ) : (
         <>
-          {cart.map((item, index) => (
+          {cart.map((item) => (
             <div
-              key={index}
+              key={item.id}
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -85,18 +87,35 @@ function Cart({ cart, removeItem, total }) {
                     ₹{item.price}
                   </p>
 
-                  <p
+                  <p>{item.stock}</p>
+
+                  <div
                     style={{
-                      color: "#777",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "10px",
+                      marginTop: "10px",
                     }}
                   >
-                    {item.stock}
-                  </p>
+                    <button
+                      onClick={() => decreaseQuantity(item.id)}
+                    >
+                      ➖
+                    </button>
+
+                    <strong>{item.quantity}</strong>
+
+                    <button
+                      onClick={() => increaseQuantity(item.id)}
+                    >
+                      ➕
+                    </button>
+                  </div>
                 </div>
               </div>
 
               <button
-                onClick={() => removeItem(index)}
+                onClick={() => removeItem(item.id)}
                 style={{
                   background: "#d32f2f",
                 }}
@@ -112,11 +131,7 @@ function Cart({ cart, removeItem, total }) {
               marginTop: "40px",
             }}
           >
-            <h2
-              style={{
-                color: "#2e7d32",
-              }}
-            >
+            <h2 style={{ color: "#2e7d32" }}>
               Total : ₹{total}
             </h2>
 
