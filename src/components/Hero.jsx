@@ -7,7 +7,7 @@ function Hero() {
 
       <h1>🏪 Welcome to Mayur Enterprises</h1>
 
-      <h2>Your One-Stop Grocery & Daily Essentials Store</h2>
+      <h2>🇮🇳 India's Most Trusted Grocery Store ❤️</h2>
 
       <p>
         Fresh groceries, dairy products, snacks, beverages, personal care,

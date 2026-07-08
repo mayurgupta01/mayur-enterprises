@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,4 +11,480 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mayur Enterprises | General Store</title>
+<meta name="description" content="Mayur Enterprises - local general store for grocery and daily essentials. Order on WhatsApp." />
+<div id="app-root"></div>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #F6F7F1;
+    --surface: #FFFFFF;
+    --ink: #22281F;
+    --ink-soft: #6B7263;
+    --green: #1F6E43;
+    --green-dark: #16522F;
+    --marigold: #E08D2C;
+    --marigold-soft: #FBEAD3;
+    --maroon: #B23A48;
+    --line: #E4E3D6;
+  }
+  * { box-sizing: border-box; }
+  #app-root {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+  .heading { font-family: 'Baloo 2', sans-serif; }
+  .toran { display: flex; justify-content: center; gap: 14px; padding: 6px 0 0; background: var(--green-dark); overflow: hidden; }
+  .toran svg { flex-shrink: 0; }
+
+  .topbar { background: var(--green-dark); color: #fff; padding: 14px 16px 20px; }
+  .topbar-row { display: flex; align-items: center; justify-content: space-between; max-width: 720px; margin: 0 auto; }
+  .brand { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 22px; }
+  .brand-sub { font-size: 11px; opacity: 0.8; margin-top: 1px; }
+  .cart-btn { position: relative; background: var(--marigold); border: none; color: #22281F; font-weight: 600; border-radius: 10px; padding: 9px 14px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .cart-badge { position: absolute; top: -7px; right: -7px; background: var(--maroon); color: #fff; border-radius: 50%; width: 19px; height: 19px; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .search-wrap { max-width: 720px; margin: 14px auto 0; display: flex; background: #fff; border-radius: 10px; overflow: hidden; }
+  .search-wrap input { flex: 1; border: none; padding: 11px 14px; font-family: inherit; font-size: 14px; outline: none; }
+  .search-wrap .icon { display: flex; align-items: center; padding: 0 12px; color: var(--ink-soft); }
+
+  .navtabs { display: flex; gap: 4px; overflow-x: auto; max-width: 720px; margin: 14px auto 0; padding: 0 16px 4px; }
+  .navtab { flex-shrink: 0; border: none; background: transparent; padding: 8px 12px; font-size: 13px; font-family: inherit; font-weight: 600; color: var(--ink-soft); cursor: pointer; border-bottom: 2px solid transparent; }
+  .navtab.active { color: var(--green-dark); border-bottom-color: var(--marigold); }
+
+  .section { max-width: 720px; margin: 0 auto; padding: 18px 16px; }
+  .section-title { font-family: 'Baloo 2', sans-serif; font-size: 19px; font-weight: 700; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+
+  .cats-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+  .cat-chip { flex-shrink: 0; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+  .cat-chip.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .offer-banner { background: linear-gradient(135deg, var(--marigold), #F0AA55); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .offer-banner .txt { color: #3B2506; }
+  .offer-banner .txt b { font-family: 'Baloo 2', sans-serif; font-size: 16px; display: block; }
+
+  .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .prod-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .prod-img { height: 110px; display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; overflow:hidden; }
+  .prod-img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .prod-tag { position: absolute; top: 6px; left: 6px; background: var(--maroon); color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+  .prod-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .prod-name { font-size: 13.5px; font-weight: 600; line-height: 1.3; }
+  .prod-cat { font-size: 10.5px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.04em; }
+  .prod-price-row { display: flex; align-items: baseline; gap: 6px; }
+  .prod-offer { font-weight: 700; color: var(--green-dark); font-size: 15px; }
+  .prod-orig { font-size: 12px; color: var(--ink-soft); text-decoration: line-through; }
+  .add-row { display: flex; align-items: center; gap: 6px; margin-top: auto; }
+  .qty-btn { border: 1px solid var(--line); background: #fff; width: 24px; height: 24px; border-radius: 6px; cursor: pointer; font-size: 14px; display:flex; align-items:center; justify-content:center; }
+  .qty-val { font-size: 13px; min-width: 16px; text-align: center; font-weight: 600; }
+  .add-btn { flex: 1; background: var(--green); color: #fff; border: none; border-radius: 7px; padding: 7px 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+  .review-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+  .review-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .review-name { font-weight: 700; font-size: 13.5px; }
+  .stars { color: var(--marigold); font-size: 13px; }
+  .review-text { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  .info-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; font-size: 13.5px; line-height: 1.7; }
+  .info-card b { color: var(--green-dark); }
+
+  .footer-links { text-align: center; padding: 20px; font-size: 12px; color: var(--ink-soft); }
+  .footer-links button { background: none; border: none; color: var(--ink-soft); text-decoration: underline; cursor: pointer; font-size: 12px; font-family: inherit; }
+
+  /* Cart drawer */
+  .overlay { position: fixed; inset: 0; background: rgba(20,20,15,0.4); z-index: 40; }
+  .drawer { position: fixed; top: 0; right: 0; height: 100%; width: 340px; max-width: 92vw; background: #fff; z-index: 50; display: flex; flex-direction: column; box-shadow: -6px 0 20px rgba(0,0,0,0.15); }
+  .drawer-head { padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .drawer-body { flex: 1; overflow-y: auto; padding: 12px 16px; }
+  .cart-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #F0EFE6; align-items: center; }
+  .cart-item .em { font-size: 26px; }
+  .cart-item .info { flex: 1; }
+  .cart-item .name { font-size: 13px; font-weight: 600; }
+  .cart-item .price { font-size: 12px; color: var(--ink-soft); }
+  .drawer-foot { padding: 14px 16px; border-top: 1px solid var(--line); }
+  .wa-btn { width: 100%; background: #1F6E43; color: #fff; border: none; border-radius: 9px; padding: 12px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .field { width: 100%; border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; font-family: inherit; font-size: 13px; margin-bottom: 8px; }
+
+  /* Admin */
+  .admin-panel { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-top: 10px; }
+  .admin-row { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid #F0EFE6; align-items: center; }
+  .admin-row .em { font-size: 22px; }
+  .admin-row .n { flex: 1; font-size: 13px; }
+  .del-btn { background: var(--maroon); color: #fff; border: none; border-radius: 6px; padding: 5px 9px; font-size: 11px; cursor: pointer; }
+  .save-btn { background: var(--marigold); color: #3B2506; border: none; border-radius: 7px; padding: 9px 14px; font-weight: 700; font-size: 13px; cursor: pointer; }
+  .note { font-size: 11.5px; color: var(--ink-soft); background: var(--marigold-soft); padding: 8px 10px; border-radius: 8px; margin-bottom: 10px; }
+</style>
+<script>
+(function(){
+  const CATEGORIES = ["Grocery","Snacks","Beverages","Personal Care","Cleaning","Pooja Items","Stationery","Household"];
+  const CAT_EMOJI = { Grocery:"🌾", Snacks:"🍿", Beverages:"🥤", "Personal Care":"🧴", Cleaning:"🧹", "Pooja Items":"🪔", Stationery:"✏️", Household:"🏠" };
+  const WA_NUMBER = "919752339458";
+  const STORAGE_KEY = "mayur-products-v1";
+  const ORDERS_KEY = "mayur-orders-v1";
+  const ADMIN_PASS = "mayur123";
+
+  const DEFAULT_PRODUCTS = [
+    {id:1, name:"Atta (Wheat Flour) 5kg", category:"Grocery", price:260, offerPrice:230, emoji:"🌾", tag:"Aaj ka Offer"},
+    {id:2, name:"Chawal (Rice) 5kg", category:"Grocery", price:320, offerPrice:290, emoji:"🍚", tag:"Aaj ka Offer"},
+    {id:3, name:"Dal (Toor Dal) 1kg", category:"Grocery", price:145, offerPrice:null, emoji:"🫘", tag:""},
+    {id:4, name:"Tel (Cooking Oil) 1L", category:"Grocery", price:165, offerPrice:150, emoji:"🛢️", tag:"Aaj ka Offer"},
+    {id:5, name:"Cheeni (Sugar) 1kg", category:"Grocery", price:46, offerPrice:null, emoji:"🍬", tag:""},
+    {id:6, name:"Namak (Salt) 1kg", category:"Grocery", price:22, offerPrice:null, emoji:"🧂", tag:""},
+    {id:7, name:"Doodh (Milk) 500ml", category:"Grocery", price:30, offerPrice:null, emoji:"🥛", tag:""},
+    {id:8, name:"Chai Patti (Tea) 250g", category:"Beverages", price:95, offerPrice:82, emoji:"🍵", tag:"Aaj ka Offer"},
+    {id:9, name:"Cold Drink 750ml", category:"Beverages", price:45, offerPrice:null, emoji:"🥤", tag:""},
+    {id:10, name:"Biscuit Pack", category:"Snacks", price:10, offerPrice:null, emoji:"🍪", tag:""},
+    {id:11, name:"Namkeen Mix 200g", category:"Snacks", price:48, offerPrice:40, emoji:"🥨", tag:"Aaj ka Offer"},
+    {id:12, name:"Sabun (Soap)", category:"Personal Care", price:36, offerPrice:null, emoji:"🧼", tag:""},
+    {id:13, name:"Shampoo Sachet Pack", category:"Personal Care", price:60, offerPrice:null, emoji:"🧴", tag:""},
+    {id:14, name:"Toothpaste", category:"Personal Care", price:55, offerPrice:null, emoji:"🪥", tag:""},
+    {id:15, name:"Detergent Powder 1kg", category:"Cleaning", price:95, offerPrice:85, emoji:"🧺", tag:"Aaj ka Offer"},
+    {id:16, name:"Dish Wash Bar", category:"Cleaning", price:25, offerPrice:null, emoji:"🍽️", tag:""},
+    {id:17, name:"Agarbatti (Incense)", category:"Pooja Items", price:32, offerPrice:null, emoji:"🪔", tag:""},
+    {id:18, name:"Notebook 200 pages", category:"Stationery", price:28, offerPrice:null, emoji:"📓", tag:""},
+  ];
+
+  const REVIEWS = [
+    {name:"Rakesh Sharma", stars:5, text:"Bahut accha samaan milta hai, taaza aur sahi rate mein. WhatsApp se order karna bahut aasan hai."},
+    {name:"Sunita Devi", stars:5, text:"Ghar tak delivery time pe mil jaati hai. Mayur Enterprises se hi hum poora mahine ka samaan lete hain."},
+    {name:"Amit Verma", stars:4, text:"Achi service hai, offers bhi kabhi kabhi milte hain. Recommend karta hoon apne mohalle walon ko."},
+  ];
+
+  let products = [];
+  let cart = {}; // id -> qty
+  let activeCategory = "All";
+  let query = "";
+  let activeTab = "home";
+  let cartOpen = false;
+  let isAdmin = false;
+
+  const root = document.getElementById("app-root");
+
+  function loadProducts() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      products = saved ? JSON.parse(saved) : DEFAULT_PRODUCTS;
+      if (!saved) localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_PRODUCTS));
+    } catch (e) {
+      products = DEFAULT_PRODUCTS;
+    }
+    render();
+  }
+
+  function saveProducts() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function loadOrders(){
+    try { return JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]"); }
+    catch(e){ return []; }
+  }
+
+  function saveOrder(order){
+    const orders = loadOrders();
+    orders.unshift(order);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+  }
+
+  function money(n){ return "₹" + n; }
+
+  function filteredProducts(){
+    return products.filter(p => {
+      const matchCat = activeCategory === "All" || p.category === activeCategory;
+      const matchQuery = p.name.toLowerCase().includes(query.toLowerCase());
+      return matchCat && matchQuery;
+    });
+  }
+
+  function cartList(){
+    return Object.entries(cart).map(([id, qty]) => ({...products.find(p=>p.id===Number(id)), qty})).filter(i=>i.qty>0 && i.id);
+  }
+
+  function cartTotal(){
+    return cartList().reduce((s,i)=> s + (i.offerPrice || i.price) * i.qty, 0);
+  }
+  function cartCount(){
+    return cartList().reduce((s,i)=> s + i.qty, 0);
+  }
+
+  function toranSVG(){
+    let flags = "";
+    const colors = ["#E08D2C","#1F6E43","#B23A48","#E08D2C","#1F6E43","#B23A48","#E08D2C","#1F6E43"];
+    for (let i=0;i<colors.length;i++){
+      flags += `<path d="M${i*26} 0 L${i*26+13} 18 L${i*26+26} 0 Z" fill="${colors[i]}"/>`;
+    }
+    return `<svg width="${colors.length*26}" height="18" viewBox="0 0 ${colors.length*26} 18">${flags}</svg>`;
+  }
+
+  function productCard(p){
+    const offer = p.offerPrice;
+    return `
+    <div class="prod-card">
+      <div class="prod-img" style="background:#EFF3E9">
+        ${p.tag ? `<span class="prod-tag">🔥 ${p.tag}</span>` : ""}
+        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<span>${p.emoji}</span>`}
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${p.category}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-price-row">
+          <span class="prod-offer">${money(offer || p.price)}</span>
+          ${offer ? `<span class="prod-orig">${money(p.price)}</span>` : ""}
+        </div>
+        <div class="add-row">
+          <button class="qty-btn" onclick="MayurApp.changeQty(${p.id}, -1)">−</button>
+          <span class="qty-val">${cart[p.id] || 0}</span>
+          <button class="qty-btn" onclick="MayurApp.changeQty(${p.id}, 1)">+</button>
+          <button class="add-btn" onclick="MayurApp.addToCart(${p.id})">🛒 Cart me Dale</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function homeTab(){
+    const offers = products.filter(p=>p.offerPrice);
+    return `
+      <div class="section" style="padding-top:16px">
+        <div class="cats-row">
+          <button class="cat-chip ${activeCategory==='All'?'active':''}" onclick="MayurApp.setCategory('All')">Sabhi</button>
+          ${CATEGORIES.map(c=>`<button class="cat-chip ${activeCategory===c?'active':''}" onclick="MayurApp.setCategory('${c}')">${CAT_EMOJI[c]} ${c}</button>`).join("")}
+        </div>
+      </div>
+      ${offers.length ? `
+      <div class="section" style="padding-top:0">
+        <div class="offer-banner">
+          <div class="txt"><b>🔥 Aaj ka Offer</b>Selected items par special price aaj hi ke liye</div>
+        </div>
+      </div>` : ""}
+      <div class="section" style="padding-top:0">
+        <div class="section-title">📦 Products</div>
+        <div class="prod-grid">
+          ${filteredProducts().map(productCard).join("") || `<div style="grid-column:1/-1;color:var(--ink-soft);text-align:center;padding:20px 0">Koi product nahi mila.</div>`}
+        </div>
+      </div>
+    `;
+  }
+
+  function reviewsTab(){
+    return `<div class="section">
+      <div class="section-title">⭐ Customer Reviews</div>
+      ${REVIEWS.map(r=>`
+        <div class="review-card">
+          <div class="review-top">
+            <span class="review-name">${r.name}</span>
+            <span class="stars">${"★".repeat(r.stars)}${"☆".repeat(5-r.stars)}</span>
+          </div>
+          <div class="review-text">${r.text}</div>
+        </div>
+      `).join("")}
+    </div>`;
+  }
+
+  function deliveryTab(){
+    return `<div class="section">
+      <div class="section-title">📦 Delivery Information</div>
+      <div class="info-card">
+        <b>Delivery Area:</b> 5 km ke andar Ghar Tak Delivery<br><br>
+        <b>Delivery Time:</b> Order confirm hone ke 30–60 minute mein<br><br>
+        <b>Delivery Charge:</b> ₹300 se upar ke order par Free Delivery, usse kam par ₹15<br><br>
+        <b>Payment:</b> Cash on Delivery / UPI on Delivery
+      </div>
+    </div>`;
+  }
+
+  function contactTab(){
+    return `<div class="section">
+      <div class="section-title">📍 Store Location &amp; Contact</div>
+      <div class="info-card">
+        <b>Mayur Enterprises</b><br>
+        Main Market Road, [Apna area/mohalla yahan dalein]<br>
+        [Shehar], Madhya Pradesh<br><br>
+        <b>Phone:</b> +91 97523 39458<br>
+        <b>Timing:</b> Subah 8:00 baje se Raat 9:30 baje tak, saatho din khula<br><br>
+        <span style="font-size:12px;color:var(--ink-soft)">(Store owner: apna exact address aur Google Maps link yahan add karein)</span>
+      </div>
+    </div>`;
+  }
+
+  function adminTab(){
+    if (!isAdmin) {
+      return `<div class="section">
+        <div class="section-title">🔒 Admin Login</div>
+        <div class="info-card">
+          <div class="note">Demo ke liye password: <b>mayur123</b>. Yeh sirf ek soft gate hai, real production security nahi hai.</div>
+          <input class="field" type="password" id="admin-pass-input" placeholder="Password dalein" />
+          <button class="save-btn" onclick="MayurApp.tryAdminLogin()">Login</button>
+        </div>
+      </div>`;
+    }
+    return `<div class="section">
+      <div class="section-title">🔧 Admin Panel</div>
+      <div class="admin-panel">
+        <div class="note">Yahan se aap product add/delete kar sakte hain. Changes turant sabko dikhenge.</div>
+        <input class="field" id="ap-name" placeholder="Product name (e.g. Atta 5kg)" />
+        <input class="field" id="ap-cat" placeholder="Category (e.g. Grocery)" />
+        <input class="field" id="ap-price" type="number" placeholder="Price (₹)" />
+        <input class="field" id="ap-offer" type="number" placeholder="Offer price (₹) — optional" />
+        <input class="field" id="ap-emoji" placeholder="Emoji icon (e.g. 🌾)" />
+        <input class="field" id="ap-image" placeholder="Product image URL — optional" />
+        <button class="save-btn" onclick="MayurApp.addProduct()">➕ Add Product</button>
+      </div>
+      <div class="admin-panel">
+        <div class="section-title" style="font-size:15px">Recent WhatsApp Orders (${loadOrders().length})</div>
+        ${loadOrders().slice(0,8).map(o=>`<div class="admin-row"><span class="em">🧾</span><span class="n">${o.date}<br>${o.name || 'Customer'} — ${money(o.total)}<br><small>${o.address || ''}</small></span></div>`).join("") || `<div class="note">Abhi koi saved order nahi hai.</div>`}
+      </div>
+      <div class="admin-panel">
+        <div class="section-title" style="font-size:15px">Current Products (${products.length})</div>
+        ${products.map(p=>`
+          <div class="admin-row">
+            <span class="em">${p.emoji}</span>
+            <span class="n">${p.name} — ${money(p.offerPrice||p.price)}</span>
+            <button class="del-btn" onclick="MayurApp.deleteProduct(${p.id})">Delete</button>
+          </div>
+        `).join("")}
+      </div>
+    </div>`;
+  }
+
+  function cartDrawer(){
+    if (!cartOpen) return "";
+    const items = cartList();
+    return `
+    <div class="overlay" onclick="MayurApp.toggleCart(false)"></div>
+    <div class="drawer">
+      <div class="drawer-head">
+        <span class="heading" style="font-weight:700;font-size:17px">🛒 Aapki Cart</span>
+        <button onclick="MayurApp.toggleCart(false)" style="background:none;border:none;font-size:18px;cursor:pointer">✕</button>
+      </div>
+      <div class="drawer-body">
+        ${items.length === 0 ? `<div style="text-align:center;color:var(--ink-soft);padding:30px 0">Cart khaali hai.</div>` :
+          items.map(i=>`
+            <div class="cart-item">
+              <span class="em">${i.emoji}</span>
+              <div class="info">
+                <div class="name">${i.name}</div>
+                <div class="price">${money(i.offerPrice||i.price)} x ${i.qty}</div>
+              </div>
+              <button class="qty-btn" onclick="MayurApp.changeQty(${i.id}, -1)">−</button>
+              <span class="qty-val">${i.qty}</span>
+              <button class="qty-btn" onclick="MayurApp.changeQty(${i.id}, 1)">+</button>
+            </div>
+          `).join("")
+        }
+      </div>
+      ${items.length ? `
+      <div class="drawer-foot">
+        <div style="display:flex;justify-content:space-between;margin-bottom:10px;font-weight:700">
+          <span>Total</span><span>${money(cartTotal())}</span>
+        </div>
+        <input class="field" id="cust-name" placeholder="Aapka naam" />
+        <input class="field" id="cust-address" placeholder="Delivery address" />
+        <button class="wa-btn" onclick="MayurApp.checkoutWhatsApp()">💬 Order on WhatsApp</button>
+      </div>` : ""}
+    </div>`;
+  }
+
+  function render(){
+    const tabs = [["home","🏠 Home"],["reviews","⭐ Reviews"],["delivery","📦 Delivery"],["contact","📍 Contact"],["admin","🔧 Admin"]];
+    let body = "";
+    if (activeTab === "home") body = homeTab();
+    else if (activeTab === "reviews") body = reviewsTab();
+    else if (activeTab === "delivery") body = deliveryTab();
+    else if (activeTab === "contact") body = contactTab();
+    else if (activeTab === "admin") body = adminTab();
+
+    root.innerHTML = `
+      <div class="toran">${toranSVG()}</div>
+      <div class="topbar">
+        <div class="topbar-row">
+          <div>
+            <div class="brand">Mayur Enterprises</div>
+            <div class="brand-sub">Aapke mohalle ki apni dukaan — ab online bhi</div>
+          </div>
+          <button class="cart-btn" onclick="MayurApp.toggleCart(true)">
+            🛒 Cart
+            ${cartCount() ? `<span class="cart-badge">${cartCount()}</span>` : ""}
+          </button>
+        </div>
+        <div class="search-wrap">
+          <span class="icon">🔍</span>
+          <input placeholder="Product khojein... (e.g. Atta, Sabun)" value="${query}" oninput="MayurApp.setQuery(this.value)" />
+        </div>
+      </div>
+      <div class="navtabs">
+        ${tabs.map(([key,label])=>`<button class="navtab ${activeTab===key?'active':''}" onclick="MayurApp.setTab('${key}')">${label}</button>`).join("")}
+      </div>
+      ${body}
+      <div class="footer-links">Mayur Enterprises · Built with care for the neighbourhood 🙏</div>
+      ${cartDrawer()}
+    `;
+  }
+
+  window.MayurApp = {
+    setCategory(c){ activeCategory = c; render(); },
+    setQuery(v){ query = v; render(); document.querySelector('.search-wrap input').focus(); document.querySelector('.search-wrap input').setSelectionRange(v.length, v.length); },
+    setTab(t){ activeTab = t; cartOpen = false; render(); },
+    toggleCart(v){ cartOpen = v; render(); },
+    changeQty(id, delta){
+      cart[id] = Math.max(0, (cart[id]||0) + delta);
+      render();
+    },
+    addToCart(id){
+      cart[id] = (cart[id]||0) + 1;
+      render();
+    },
+    checkoutWhatsApp(){
+      const items = cartList();
+      if (!items.length) return;
+      const name = document.getElementById('cust-name')?.value || "";
+      const addr = document.getElementById('cust-address')?.value || "";
+      let msg = `Namaste Mayur Enterprises,\nMujhe yeh order chahiye:\n\n`;
+      items.forEach(i => { msg += `• ${i.name} x${i.qty} — ${money((i.offerPrice||i.price)*i.qty)}\n`; });
+      msg += `\nTotal: ${money(cartTotal())}\n\nNaam: ${name}\nAddress: ${addr}`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    },
+    tryAdminLogin(){
+      const val = document.getElementById('admin-pass-input').value;
+      if (val === ADMIN_PASS) { isAdmin = true; render(); }
+      else alert("Galat password. Dobara try karein.");
+    },
+    async addProduct(){
+      const name = document.getElementById('ap-name').value.trim();
+      const category = document.getElementById('ap-cat').value.trim() || "Grocery";
+      const price = parseFloat(document.getElementById('ap-price').value);
+      const offerVal = document.getElementById('ap-offer').value;
+      const offerPrice = offerVal ? parseFloat(offerVal) : null;
+      const emoji = document.getElementById('ap-emoji').value.trim() || "🛒";
+      const image = document.getElementById('ap-image').value.trim();
+      if (!name || !price) { alert("Naam aur price zaroori hai."); return; }
+      const newId = products.length ? Math.max(...products.map(p=>p.id)) + 1 : 1;
+      products.push({id:newId, name, category, price, offerPrice, emoji, image, tag: offerPrice ? "Aaj ka Offer" : ""});
+      saveProducts();
+      render();
+    },
+    deleteProduct(id){
+      if (!confirm("Yeh product delete karna hai?")) return;
+      products = products.filter(p=>p.id !== id);
+      saveProducts();
+      render();
+    }
+  };
+
+  loadProducts();
+})();
+</script>
+
+</head>
+<body>
+</body>
+>>>>>>> 16c19a8b47fa4aecf868927daa2f95e4f3eeeb46
 </html>
