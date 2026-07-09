@@ -16,7 +16,7 @@ function Home({ addToCart, addToWishlist, search }) {
         setSelectedCategory={setSelectedCategory}
       />
 
-      <div style={{ textAlign: "center", margin: "20px" }}>
+      <div className="sort-box">
         <select
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}

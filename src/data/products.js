@@ -15,12 +15,11 @@ const products = [
     description:
       "Premium quality whole wheat flour made from selected grains. Soft rotis and healthy everyday meals.",
   },
-
   {
     id: 2,
     name: "Fortune Sunflower Oil",
     brand: "Fortune",
-    category: "Cooking Oil",
+    category: "Grocery",
     weight: "1 Litre",
     price: 180,
     oldPrice: 220,
@@ -32,7 +31,6 @@ const products = [
     description:
       "Refined sunflower oil suitable for daily cooking with light taste and healthy nutrition.",
   },
-
   {
     id: 3,
     name: "Tata Salt",
@@ -49,7 +47,6 @@ const products = [
     description:
       "India's trusted iodized salt for better health and great taste in every meal.",
   },
-
   {
     id: 4,
     name: "Parle-G Biscuits",

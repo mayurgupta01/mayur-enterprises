@@ -20,34 +20,32 @@ function App() {
   const [search, setSearch] = useState("");
 
   const addToCart = (product) => {
-    const existing = cart.find((item) => item.id === product.id);
+    setCart((prevCart) => {
+      const existing = prevCart.find((item) => item.id === product.id);
 
-    if (existing) {
-      setCart(
-        cart.map((item) =>
+      if (existing) {
+        return prevCart.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
-      );
-    } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
-    }
+        );
+      }
+
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
   };
 
   const increaseQuantity = (id) => {
-    setCart(
-      cart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
   };
 
   const decreaseQuantity = (id) => {
-    setCart(
-      cart.map((item) =>
+    setCart((prevCart) =>
+      prevCart.map((item) =>
         item.id === id && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
@@ -56,34 +54,33 @@ function App() {
   };
 
   const removeItem = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const addToWishlist = (product) => {
-    const alreadyAdded = wishlist.find(
-      (item) => item.id === product.id
-    );
+    setWishlist((prevWishlist) => {
+      const alreadyAdded = prevWishlist.find((item) => item.id === product.id);
 
-    if (!alreadyAdded) {
-      setWishlist([...wishlist, product]);
-    }
+      if (alreadyAdded) {
+        return prevWishlist;
+      }
+
+      return [...prevWishlist, product];
+    });
   };
 
   const removeWishlistItem = (id) => {
-    setWishlist(
-      wishlist.filter((item) => item.id !== id)
+    setWishlist((prevWishlist) =>
+      prevWishlist.filter((item) => item.id !== id)
     );
   };
 
   const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + Number(item.price) * item.quantity,
     0
   );
 
-  const cartCount = cart.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <>
@@ -142,15 +139,7 @@ function App() {
 
         <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/checkout"
-          element={
-            <Checkout
-              cart={cart}
-              total={total}
-            />
-          }
-        />
+        <Route path="/checkout" element={<Checkout cart={cart} total={total} />} />
 
         <Route path="/admin" element={<Admin />} />
       </Routes>

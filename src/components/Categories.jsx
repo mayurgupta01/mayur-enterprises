@@ -1,5 +1,6 @@
-function Categories() {
+function Categories({ selectedCategory, setSelectedCategory }) {
   const categories = [
+    { emoji: "🛒", name: "All", items: "All Items" },
     { emoji: "🍚", name: "Grocery", items: "250+ Items" },
     { emoji: "🥛", name: "Dairy", items: "80+ Items" },
     { emoji: "🥤", name: "Beverages", items: "120+ Items" },
@@ -14,52 +15,25 @@ function Categories() {
     <section className="categories">
       <h2>🛍️ Shop by Category</h2>
 
-      <p
-        style={{
-          color: "#666",
-          marginBottom: "35px",
-          fontSize: "18px",
-        }}
-      >
+      <p className="section-subtitle">
         Choose your favourite category and start shopping.
       </p>
 
       <div className="category-grid">
-        {categories.map((category, index) => (
-          <div className="category-card" key={index}>
-            <div
-              style={{
-                fontSize: "60px",
-                marginBottom: "15px",
-              }}
-            >
-              {category.emoji}
-            </div>
+        {categories.map((category) => (
+          <div
+            className={`category-card ${
+              selectedCategory === category.name ? "active-category" : ""
+            }`}
+            key={category.name}
+          >
+            <div className="category-emoji">{category.emoji}</div>
 
-            <h3
-              style={{
-                color: "#222",
-                marginBottom: "8px",
-              }}
-            >
-              {category.name}
-            </h3>
+            <h3>{category.name}</h3>
 
-            <p
-              style={{
-                color: "#2e7d32",
-                fontWeight: "bold",
-              }}
-            >
-              {category.items}
-            </p>
+            <p>{category.items}</p>
 
-            <button
-              style={{
-                marginTop: "15px",
-                width: "100%",
-              }}
-            >
+            <button onClick={() => setSelectedCategory(category.name)}>
               View Products
             </button>
           </div>

@@ -1,13 +1,17 @@
 function Admin() {
   return (
-    <div className="login-container">
-      <div className="login-card">
+    <div className="admin-container">
+      <div className="admin-card">
         <h1>🛠 Admin Panel</h1>
 
-        <input className="login-input" type="text" placeholder="Product Name" />
-        <input className="login-input" type="number" placeholder="Price" />
-        <input className="login-input" type="text" placeholder="Category" />
-        <input className="login-input" type="text" placeholder="Image URL" />
+        <p className="admin-note">
+          Product add/edit/delete will work after database setup.
+        </p>
+
+        <input className="form-input" type="text" placeholder="Product Name" />
+        <input className="form-input" type="number" placeholder="Price" />
+        <input className="form-input" type="text" placeholder="Category" />
+        <input className="form-input" type="text" placeholder="Image URL" />
 
         <button>➕ Add Product</button>
       </div>

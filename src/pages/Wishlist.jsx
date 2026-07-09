@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 
 function Wishlist({ wishlist, removeWishlistItem, addToCart }) {
   return (
-    <div style={{ maxWidth: "1100px", margin: "40px auto", padding: "20px" }}>
-      <h1 style={{ textAlign: "center", color: "#e91e63" }}>
-        ❤️ My Wishlist
-      </h1>
+    <div className="wishlist-page">
+      <h1 className="wishlist-title">❤️ My Wishlist</h1>
 
       {wishlist.length === 0 ? (
-        <div style={{ textAlign: "center", marginTop: "60px" }}>
+        <div className="empty-wishlist">
           <h2>Your wishlist is empty 💔</h2>
           <p>Add your favourite products here.</p>
 
@@ -18,40 +16,22 @@ function Wishlist({ wishlist, removeWishlistItem, addToCart }) {
         </div>
       ) : (
         wishlist.map((item) => (
-          <div
-            key={item.id}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              background: "white",
-              margin: "20px 0",
-              padding: "20px",
-              borderRadius: "15px",
-              boxShadow: "0 5px 15px rgba(0,0,0,.1)",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-              <img
-                src={item.image}
-                alt={item.name}
-                style={{ width: "100px", height: "100px", objectFit: "contain" }}
-              />
+          <div className="wishlist-row" key={item.id}>
+            <div className="wishlist-product">
+              <img src={item.image} alt={item.name} loading="lazy" />
 
               <div>
                 <h3>{item.name}</h3>
-                <p style={{ color: "#2e7d32", fontWeight: "bold" }}>
-                  ₹{item.price}
-                </p>
+                <p>₹{item.price}</p>
               </div>
             </div>
 
-            <div>
+            <div className="wishlist-actions">
               <button onClick={() => addToCart(item)}>🛒 Add to Cart</button>
 
               <button
+                className="remove-btn"
                 onClick={() => removeWishlistItem(item.id)}
-                style={{ background: "#d32f2f", marginLeft: "10px" }}
               >
                 🗑 Remove
               </button>

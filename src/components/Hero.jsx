@@ -10,9 +10,8 @@ function Hero() {
       <h2>🇮🇳 India's Most Trusted Grocery Store ❤️</h2>
 
       <p>
-        Fresh groceries, dairy products, snacks, beverages, personal care,
-        home essentials and much more — all at affordable prices with fast
-        delivery.
+        Fresh groceries, dairy products, snacks, beverages, personal care, home
+        essentials and much more — all at affordable prices with fast delivery.
       </p>
 
       <div className="hero-buttons">
@@ -22,24 +21,12 @@ function Hero() {
           href="https://wa.me/919752339458"
           target="_blank"
           rel="noreferrer"
-          style={{ textDecoration: "none" }}
         >
-          <button className="secondary-btn">
-            💬 Order on WhatsApp
-          </button>
+          <button className="secondary-btn">💬 Order on WhatsApp</button>
         </a>
       </div>
 
-      <div
-        style={{
-          marginTop: "40px",
-          display: "flex",
-          justifyContent: "center",
-          gap: "40px",
-          flexWrap: "wrap",
-          color: "white",
-        }}
-      >
+      <div className="hero-features">
         <div>
           <h2>🚚</h2>
           <p>Fast Delivery</p>
