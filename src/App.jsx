@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
@@ -14,10 +14,23 @@ import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
 import Admin from "./pages/Admin";
 
+function getStoredData(key) {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+}
+
 function App() {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
+  const [cart, setCart] = useState(() => getStoredData("cart"));
+  const [wishlist, setWishlist] = useState(() => getStoredData("wishlist"));
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
@@ -138,9 +151,7 @@ function App() {
         />
 
         <Route path="/login" element={<Login />} />
-
         <Route path="/checkout" element={<Checkout cart={cart} total={total} />} />
-
         <Route path="/admin" element={<Admin />} />
       </Routes>
 
