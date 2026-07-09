@@ -722,4 +722,75 @@ button:hover {
   button {
     font-size: 15px;
   }
+  .admin-page {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.admin-products {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.admin-product-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.admin-product-row img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.admin-logout {
+  background: #d32f2f;
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .admin-page {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-product-row button {
+    width: 100%;
+  }
+}
+.admin-product-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cancel-edit-btn {
+  background: #555;
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .admin-product-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .admin-product-actions button {
+    width: 100%;
+  }
+}
 }
